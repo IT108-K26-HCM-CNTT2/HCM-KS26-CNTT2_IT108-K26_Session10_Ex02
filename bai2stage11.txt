@@ -1,0 +1,30 @@
+BÀI TẬP QUẢN LÝ DỮ LIỆU EXCEL: KHẮC PHỤC LỖI DATABASE
+
+PHẦN 1: PHÂN TÍCH LỖI SAI (VI PHẠM QUY TẮC VÀNG)
+
+1. Vi phạm quy tắc Không gộp ô (No Merged Cells):
+- Hiện tượng: Có các ô bị Merge Cell ở hàng tiêu đề.
+- Hậu quả: Làm gián đoạn cấu trúc bảng phẳng, khiến Excel không nhận diện được trọn vẹn vùng dữ liệu và làm mất nút AutoFilter ở giữa bảng.
+
+2. Vi phạm quy tắc Không có hàng trống / cột trống (No Blank Rows/Columns):
+- Hiện tượng: Có hàng trống nằm ngay giữa bảng dữ liệu.
+- Hậu quả: Khi bật AutoFilter (Ctrl + Shift + L), Excel chỉ hiểu vùng dữ liệu từ dòng đầu tiên đến trước hàng trống đó, làm mất tính năng lọc ở các dòng phía dưới.
+
+3. Vi phạm quy tắc Dữ liệu đồng nhất / Sạch sẽ (Clean Data / No Invisible Spaces):
+- Hiện tượng: Cùng một trạng thái "hỏng" nhưng có dữ liệu bị dính khoảng trắng thừa (ví dụ: "hỏng ") khiến Excel hiểu nhầm là hai giá trị khác nhau.
+- Hậu quả: Khi lọc, Excel chia thành 2 nhóm riêng biệt, không gom chung lại được.
+
+
+PHẦN 2: HOÀN THIỆN VÀ XỬ LÝ LỖI
+
+1. Làm sạch cột "Trạng thái" bằng hàm TRIM:
+- Bước 1: Tạo một cột phụ bên cạnh, dùng hàm TRIM để cắt bỏ khoảng trắng thừa. Ví dụ tại ô phụ, gõ: =TRIM(C2) (giả sử cột trạng thái ở C).
+- Bước 2: Kéo công thức xuống hết bảng để làm sạch toàn bộ dữ liệu.
+- Bước 3: Copy kết quả ở cột phụ và Paste Values đè ngược lại cột cũ, sau đó xóa cột phụ đi.
+
+2. Xử lý hàng trống và gỡ Merge Cell để sửa AutoFilter:
+- Gỡ Merge Cell: Bôi đen vùng tiêu đề đang bị gộp -> Bấm vào nút Merge & Center trên thẻ Home để hủy gộp, sau đó điền lại tiêu đề vào các ô riêng biệt cho đúng chuẩn bảng.
+- Xóa hàng trống: Xóa bỏ hoàn toàn các hàng trống nằm ngắt quãng trong bảng dữ liệu.
+
+3. Kiểm tra lại kết quả:
+- Bôi đen lại toàn bộ bảng thiết bị IoT -> Bấm Ctrl + Shift + L để bật lại AutoFilter. Lúc này, nút lọc sẽ hiển thị đầy đủ và khi lọc trạng thái "hỏng", Excel sẽ gom chung tất cả vào một nhóm chính xác tuyệt đối.
